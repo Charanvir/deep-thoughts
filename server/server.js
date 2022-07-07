@@ -8,10 +8,14 @@ const { typeDefs, resolvers } = require("./schemas");
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
+
+const { authMiddleware } = require("./utils/auth")
 // create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  // ensures that every request performs an authenication check, and the updated request object will be passed to the resolvers as the context
+  context: authMiddleware
 });
 
 const app = express();
