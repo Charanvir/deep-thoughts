@@ -58,3 +58,47 @@ export const QUERY_USER = gql`
     }
   }
 `
+
+// we arent passing any variables into the query, which is why it is formatted differently from the rest
+// this will be used to retrieve all the data from the logged in user
+export const QUERY_ME = gql`
+  {
+    me {
+      _id
+      username
+      email
+      friendCount
+      thoughts {
+        _id
+        thoughtText
+        createdAt
+        reactionCount
+        reactions {
+          _id
+          createdAt
+          reactionBody
+          username
+        }
+      }
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const QUERY_ME_BASIC = gql`
+  {
+    me {
+      _id
+      username
+      email
+      friendCount
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;
